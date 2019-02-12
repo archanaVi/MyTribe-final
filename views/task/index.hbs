@@ -1,0 +1,28 @@
+
+{{!-- {{#each task}} <h1>This is your tasks</h1>
+  <p>{{this.task}}
+    <a href="/task/{{this.id}}"> See </a> </p>
+  <form action="/task/{{this.id}}/delete" method="post">
+  <button type="submit">DELETE</button> </form> 
+  <form action="/task/{{this.id}}/edit" method="get">
+  <button type="submit">EDIT</button>
+  </form> 
+{{/each}} --}}
+
+{{!-- <a href="/task/new"> <button type="submit">New task</button> </a> --}}
+
+<h1>Tasks</h1>
+
+{{#if user}}
+ <div>
+   <h1>Welcome {{user.username}}</h1>
+ </div>
+{{/if}}
+
+{{#each ArrayOfCreatedTasks}} <h1>These are your tasks</h1>
+ <p>{{this.task}}</p>
+ {{else}}
+ <h1>You don't have any tasks yet.</h1>
+{{/each}}
+
+ <a href="/task/new"> <button type="submit">New task</button> </a>
