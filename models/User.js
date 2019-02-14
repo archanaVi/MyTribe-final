@@ -16,8 +16,8 @@ const userSchema = new Schema({
   role: Boolean,
   color: String,
   //tribe: [ { type: Schema.Types.ObjectId, ref: 'Tribe' } ],
-  createdTasks: [ { type: Schema.Types.ObjectId, ref: 'Task' } ],
-  assignedTasks: [ { type: Schema.Types.ObjectId, ref: 'Task' } ]
+  //createdTasks: [ { type: Schema.Types.ObjectId, ref: 'Task' } ],
+  //assignedTasks: [ { type: Schema.Types.ObjectId, ref: 'Task' } ]
 });
 
 const User = mongoose.model('User', userSchema);

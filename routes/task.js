@@ -3,23 +3,25 @@ const router  = express.Router();
 const User    = require('../models/User');
 const Tribe   = require('../models/Tribe');
 const Task   = require('../models/Task');
+const ensureLogin = require('connect-ensure-login');
 
-router.get('/task', (req, res, next) => {
+router.get('/task', ensureLogin.ensureLoggedIn(), (req, res, next) => {
+
+
   if(!req.user){
     res.redirect("/login");
     return;
   }
   Task.find({ createdBy: req.user._id })
-  .populate("assignedTo")
-  .populate("task")
-  .then((myCreatedTasks) => {
-    res.locals.ArrayOfCreatedTasks = myCreatedTasks;
-    console.log(ArrayOfCreatedTasks);
-    res.render("task/index");
-  })
-  .catch((err) => {
-    next(err)
-  })
+    .populate("assignedTo")
+    .then((myCreatedTasks) => {
+      res.locals.ArrayOfCreatedTasks = myCreatedTasks;
+      //console.log(ArrayOfCreatedTasks);
+      res.render("task/index");
+    })
+    .catch((err) => {
+      next(err)
+    })
     // .then(task => {
     //   res.render("task/index", { task });
     // })
@@ -29,8 +31,13 @@ router.get('/task', (req, res, next) => {
 })
 
 router.get('/task/new', (req, res, next) => {
-  Tribe.findOne({members:req.user._id}).populate("members")
+  Tribe.findOne({
+    members:{$in: [req.user._id]}
+  }).populate("members")
   .then(tribe => {
+    if (!tribe) {
+      res.redirect('/tribe')
+    }
     console.log(tribe);
     res.render("task/new", {
       tribe

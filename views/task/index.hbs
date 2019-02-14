@@ -11,15 +11,16 @@
 
 {{!-- <a href="/task/new"> <button type="submit">New task</button> </a> --}}
 
-<h1>Tasks</h1>
+ <h1>These are your tasks</h1>
 
 {{#if user}}
  <div>
    <h1>Welcome {{user.username}}</h1>
+
  </div>
 {{/if}}
 
-{{#each ArrayOfCreatedTasks}} <h1>These are your tasks</h1>
+{{#each ArrayOfCreatedTasks}} 
  <p>{{this.task}}</p>
  {{else}}
  <h1>You don't have any tasks yet.</h1>

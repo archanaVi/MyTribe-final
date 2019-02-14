@@ -69,7 +69,7 @@ router.post('/createTribe', (req, res, next) => {
     next(err);
   }).then(function(users){
     console.log(users);
-    users.push()
+    users.push(req.user)
 
     const newTribe = new Tribe({
       name: name,
