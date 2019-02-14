@@ -148,11 +148,15 @@ router.get("/login", (req, res, next) => {
 
 
 router.post("/login", passport.authenticate("local", {
-  successRedirect: "/task",
+  successRedirect: "/dashboard",
   failureRedirect: "/login",
   failureFlash: true,
   passReqToCallback: true
 }));
+
+router.get("/dashboard", (req,res,next)=>{
+  res.render("dashboard.hbs")
+})
 
 
 
